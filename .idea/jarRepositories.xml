@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="pprb-aep2-release" />
+      <option name="name" value="pprb-aep2-release" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/AEP2_release/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-namedcount-snapshot" />
+      <option name="name" value="sbtnexus-namedcount-snapshot" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/PPRB_NamedCounter_snapshot/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="ae-spark_release" />
+      <option name="name" value="ae-spark_release" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/AE-SPARK_release/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="CRADLE_thirdparty" />
+      <option name="name" value="CRADLE_thirdparty" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/CRADLE_thirdparty/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-platform-release" />
+      <option name="name" value="sbtnexus-platform-release" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/Platform_release/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-tfido" />
+      <option name="name" value="sbtnexus-tfido" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/TFIDO_group" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-central" />
+      <option name="name" value="sbtnexus-central" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/central/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="pprb-dev-group" />
+      <option name="name" value="pprb-dev-group" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/PPRB_dev_group/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-pprbac" />
+      <option name="name" value="sbtnexus-pprbac" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/PPRBAC_release/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-intlab" />
+      <option name="name" value="sbtnexus-intlab" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/groups/INTLAB_group/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="PPRB_CRYPTO_release" />
+      <option name="name" value="PPRB_CRYPTO_release" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/PPRB_CRYPTO_release/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-mdm" />
+      <option name="name" value="sbtnexus-mdm" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/groups/mdm_group/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-external" />
+      <option name="name" value="sbtnexus-external" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/service/local/repositories/central/content" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="pprb-code-review-release" />
+      <option name="name" value="pprb-code-review-release" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/CodeReviewPPRB_release/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="backoffice_release" />
+      <option name="name" value="backoffice_release" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/backoffice_release" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-platform-snapshot" />
+      <option name="name" value="sbtnexus-platform-snapshot" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/Platform_snapshot/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-rko-snapshot" />
+      <option name="name" value="sbtnexus-rko-snapshot" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/18plus_RKO_snapshot/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-platform-thirdparthy" />
+      <option name="name" value="sbtnexus-platform-thirdparthy" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/Platform_thirdparty" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-prb-mdmp" />
+      <option name="name" value="sbtnexus-prb-mdmp" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/groups/prb-mdmp_group/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-corp-releases" />
+      <option name="name" value="sbtnexus-corp-releases" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/corp-releases/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-pprbac-snapshot" />
+      <option name="name" value="sbtnexus-pprbac-snapshot" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/PPRBAC_snapshot/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="esb_release" />
+      <option name="name" value="esb_release" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/esb_release/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="gbk-release" />
+      <option name="name" value="gbk-release" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/GBK_release/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="ucp-release" />
+      <option name="name" value="ucp-release" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/ucp_release/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sbtnexus-prime" />
+      <option name="name" value="sbtnexus-prime" />
+      <option name="url" value="https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/prime-repo/" />
+    </remote-repository>
+  </component>
+</project>

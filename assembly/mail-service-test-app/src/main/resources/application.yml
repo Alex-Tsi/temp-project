@@ -1,0 +1,21 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+camel:
+  component:
+    servlet:
+      mapping:
+        context-path: "/mail/*"
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: debug

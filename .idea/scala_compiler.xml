@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <profile name="Maven 1" modules="assembly,infra,inheritance-test-app,inheritance-test-route,mail-service-test-app,mail-service-test-route,routes,scala-test-syntax,temp-proj" />
+  </component>
+</project>

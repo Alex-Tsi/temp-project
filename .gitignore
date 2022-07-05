@@ -1,0 +1,8 @@
+# Project exclude paths
+/assembly/inheritance-test-app/target/
+/assembly/mail-service-test-app/target/
+/assembly/target/
+/infra/target/
+/routes/inheritance-test-route/target/
+/routes/mail-service-test-route/target/
+/scala-test-syntax/target/

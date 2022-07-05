@@ -1,0 +1,15 @@
+POST http://localhost:8080/mail/test
+Content-Type: application/xml
+
+<div dir="ltr">2</div>
+<br>
+<div class="gmail_quote">
+    <div dir="ltr" class="gmail_attr">вт, 21 июн. 2022 г. в 16:57, Алекс Цыпуштанов &lt;<a
+            href="mailto:alekscypushtanov@gmail.com">alekscypushtanov@gmail.com</a>&gt;:
+        <br>
+    </div>
+    <blockquote class="gmail_quote"
+                style="margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+        <div dir="ltr">1</div>
+    </blockquote>
+</div>
