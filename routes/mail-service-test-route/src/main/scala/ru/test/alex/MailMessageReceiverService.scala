@@ -1,17 +1,21 @@
 package ru.test.alex
 
+import org.apache.commons.io.IOUtils
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream
+import org.jsoup.Jsoup
 import org.slf4s.Logging
 import org.springframework.stereotype.Service
 import ru.test.alex.MailMessageReceiverService.temporaryParsedMailMessageModel.{AttachmentObject, TemporaryMailMessage}
 
-import java.io.{BufferedOutputStream, OutputStream}
+import java.io.{BufferedOutputStream, File, FileOutputStream, OutputStream}
 import java.nio.charset.StandardCharsets
 import java.util.{Base64, UUID}
 import javax.mail.internet.{InternetAddress, MimeUtility}
-import javax.mail.{Address, Message, Multipart, Part}
+import javax.mail.{Message, Multipart, Part}
+import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
+import scala.util.matching.Regex
 import scala.util.{Failure, Success, Try}
 
 
@@ -19,31 +23,45 @@ import scala.util.{Failure, Success, Try}
 class MailMessageReceiverService extends Logging {
 
   def processMessage(implicit m: Message): Unit = {
-    Try {
+    val temporaryMailMessage: TemporaryMailMessage = Try {
       TemporaryMailMessage(
         from = getFromAttribute,
         subject = m.getSubject,
-        description = null,
+        description = getDescription,
+        links = getLinks,
         body = getBase64Eml,
         attachments = getByteArrayAttachments
       )
     } match {
-      case Success(_) =>
+      case Success(value) => value
       case Failure(exception) =>
         log.error("Exception during mail message parsing")
         throw new RuntimeException(exception.getLocalizedMessage)
     }
+    println()
+    println()
   }
 
-  def getFromAttribute(implicit m: Message): Array[String] = m.getFrom.map { case address: InternetAddress => address.getAddress; case _ => toString}
+  def getFromAttribute(implicit m: Message): Array[String] = m.getFrom.map { case address: InternetAddress => address.getAddress; case _ => toString }
 
-//  def getLinks(implicit part: Part): String = {
-//
-//  }
-//
-//  private def dumpToPlainTextMsg(part: Part): String = {
-//
-//  }
+  def getDescription(implicit part: Part): String = {
+    getOriginalMessagePayload // TODO: need filter message
+  }
+
+  def getLinks(implicit part: Part): String = {
+    log.info("Getting inlined links")
+    val originalContent: String = getOriginalMessagePayload
+    val linksRegex: Regex = "https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/\\/\\=]*)".r
+    linksRegex.findAllIn(originalContent).filter(_.nonEmpty).mkString(";")
+  }
+
+  private def getOriginalMessagePayload(implicit part: Part): String = {
+    val dumpedPart: Option[Part] = dump2RequiredPartByContentType(part, "text/plain")
+    dumpedPart.map(_.getContent.toString).getOrElse {
+      val htmlPart: Option[Part] = dump2RequiredPartByContentType(part, "text/html")
+      Jsoup.parse(htmlPart.getOrElse(throw new NoSuchElementException("No message body found")).getContent.toString).text()
+    }
+  }
 
   def getBase64Eml(implicit part: Part): String = {
     log.info("Creating Base64 .eml file for sending")
@@ -67,37 +85,46 @@ class MailMessageReceiverService extends Logging {
   }
 
   def getByteArrayAttachments(implicit part: Part): ListBuffer[AttachmentObject] = {
-    if (!part.isMimeType("multipart/mixed")) {
-      log.info("message without attachments")
+    val dumpedPartWrap: Option[Part] = dump2RequiredPartByContentType(part, "multipart/mixed")
+    if (dumpedPartWrap.isEmpty) {
+      log.info("Message without attachments")
       return ListBuffer.empty
     }
-    val mpMessage: Multipart = part.getContent.asInstanceOf[Multipart]
     val attachments: ListBuffer[AttachmentObject] = new ListBuffer[AttachmentObject]
-    Range(1, mpMessage.getCount).foreach { mn =>
-      val bp: Part = mpMessage.getBodyPart(mn)
-      if (bp.getDisposition == null || Part.ATTACHMENT.equalsIgnoreCase(bp.getDisposition)) attachmentToByteArray(bp, attachments)
+    dumpedPartWrap.foreach { m =>
+      val mPart: Multipart = m.getContent.asInstanceOf[Multipart]
+      Range(1, mPart.getCount).foreach { pNumber =>
+        val bp: Part = mPart.getBodyPart(pNumber)
+        if (bp.getDisposition == null || Part.ATTACHMENT.equalsIgnoreCase(bp.getDisposition)) attachmentToByteArray(bp, attachments)
+      }
     }
     attachments
   }
 
   private def attachmentToByteArray(part: Part, attachments: ListBuffer[AttachmentObject]): ListBuffer[AttachmentObject] = {
-    val os: OutputStream = new ByteArrayOutputStream()
-    val fName: String = Option(part.getFileName).filter(_.isEmpty).map(MimeUtility.decodeText).getOrElse("FileName_" + UUID.randomUUID().toString)
-    part.writeTo(new BufferedOutputStream(os))
-    val payload = os.asInstanceOf[ByteArrayOutputStream].toByteArray
+    val fName: String = Option(part.getFileName).filter(_.nonEmpty).map(MimeUtility.decodeText).getOrElse("FileName_" + UUID.randomUUID().toString)
+    val payload = IOUtils.toByteArray(part.getInputStream)
     attachments += AttachmentObject(fileName = fName, payload = payload)
-    attachments
   }
 
+  private def dump2RequiredPartByContentType(part: Part, mimeType: String): Option[Part] = {
+    if (part.isMimeType(mimeType)) return Option(part)
+    else if (part.isMimeType("multipart/*")) {
+      val mp: Multipart = part.getContent.asInstanceOf[Multipart]
+      for (p <- 0 until mp.getCount) {
+        val dumpedPart: Option[Part] = dump2RequiredPartByContentType(mp.getBodyPart(p), mimeType)
+        if (dumpedPart.nonEmpty) return dumpedPart
+      }
+    }
+    None
+  }
 }
 
 object MailMessageReceiverService {
 
   object temporaryParsedMailMessageModel {
-    case class TemporaryMailMessage(from: Array[String], subject: String, description: String, body: String, attachments: Seq[AttachmentObject])
+    case class TemporaryMailMessage(from: Array[String], subject: String, description: String, links: String, body: String, attachments: Seq[AttachmentObject])
 
     case class AttachmentObject(fileName: String, payload: Array[Byte])
   }
-
 }
-
